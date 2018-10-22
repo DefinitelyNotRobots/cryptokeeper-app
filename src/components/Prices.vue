@@ -1,6 +1,8 @@
 <template>
   <div class="prices">
-    <h1>Bitcoin Price Index</h1>
+    
+    <h2>Bitcoin Price Index</h2>
+
     <div
       v-for="currency in info"
       class="text"
@@ -13,16 +15,34 @@
         {{ currency.rate_float | currencydecimal }}
       </span>
     </div>
+
+    <h2>Dummy Table</h2>
+
+    <b-table striped hover class="text" :items="items"></b-table>
+
   </div>    
 </template>
 
 <script>
 import axios from 'axios';
+import bTable from 'bootstrap-vue/es/components/table/table';
+
+// Vue.component('b-table', bTable);
+
 
 export default {
+  components: {
+    bTable
+  },
   data() {
     return {
-      info: null
+      info: null,
+      items: [
+        { isActive: true, age: 40, first_name: 'Dickerson', last_name: 'Macdonald' },
+        { isActive: false, age: 21, first_name: 'Larsen', last_name: 'Shaw' },
+        { isActive: false, age: 89, first_name: 'Geneva', last_name: 'Wilson' },
+        { isActive: true, age: 38, first_name: 'Jami', last_name: 'Carney' }
+      ]
     };
   },
   mounted() {
