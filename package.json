@@ -17,6 +17,8 @@
     "bootstrap-vue": "^2.0.0-rc.11",
     "chart.js": "^2.7.3",
     "chartjs-plugin-streaming": "^1.7.0",
+    "moment": "^2.22.2",
+    "pusher-js": "^4.3.1",
     "vue": "^2.5.17",
     "vue-chartjs": "^3.4.0",
     "vue-router": "^3.0.1"

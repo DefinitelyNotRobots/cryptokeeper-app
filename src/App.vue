@@ -15,6 +15,10 @@
           <h2>Streaming Chart</h2>
           <StreamingChart :chartData="chartData2" :options="options2" />
         </div>
+        <!-- <div class="Chart3">
+          <h2>Bitcoin Chart</h2>
+          <BitcoinChart id="Bitfinex" :chartData="chartData3" :options="options3" />
+        </div> -->
         <div class="RandomChart">
           <RandomChart/>
         </div>
@@ -28,15 +32,45 @@ import Chart from './components/Chart.vue';
 import StreamingChart from './components/StreamingChart.vue';
 import RandomChart from './components/RandomChart.vue';
 import Prices from './components/Prices.vue';
+import BitcoinChart from './components/BitcoinChart.vue';
+import 'chartjs-plugin-streaming';
 
 
+//not sure if necessary
+import 'chart.js';
+import 'pusher-js';
+import 'moment';
+// import moment from 'moment';
+// moment().format();
 
-// var color = Chart.helpers.color;
+
+var buf = {};
+buf['Bitfinex'] = [[], []];
+var id = 'Bitfinex';
+
+
+var ws = new WebSocket('wss://api.bitfinex.com/ws/');
+ws.onopen = function() {
+  ws.send(JSON.stringify({      // send subscribe request
+    'event': 'subscribe',
+    'channel': 'trades',
+    'pair': 'BTCUSD'
+  }));
+};
+ws.onmessage = function(msg) {     // callback on message receipt
+  var response = JSON.parse(msg.data);
+  if(response[1] === 'te') {    // Only 'te' message type is needed
+    buf['Bitfinex'][response[5] > 0 ? 0 : 1].push({
+      x: response[3] * 1000, // timestamp in milliseconds
+      y: response[4]         // price in US dollar
+    });
+  }
+};
 
 export default {
   name: 'app',
   components: {
-    Chart, RandomChart, Prices, StreamingChart
+    Chart, RandomChart, Prices, StreamingChart, BitcoinChart
   },
   data() {
     return {
@@ -117,6 +151,49 @@ export default {
         hover: {
           mode: 'nearest',
           intersect: false
+        }
+      },
+
+      chartData3: {
+        datasets: [{
+          data: [],
+          label: 'Buy',                     // 'buy' price data
+          borderColor: 'rgb(255, 99, 132)', // line color
+          backgroundColor: 'rgba(255, 99, 132, 0.5)', // fill color
+          fill: false,                      // no fill
+          lineTension: 0                    // straight line
+        }, {
+          data: [],
+          label: 'Sell',                    // 'sell' price data
+          borderColor: 'rgb(54, 162, 235)', // line color
+          backgroundColor: 'rgba(54, 162, 235, 0.5)', // fill color
+          fill: false,                      // no fill
+          lineTension: 0                    // straight line
+        }]
+      },
+      chartOptions3: {
+        title: {
+          text: 'BTC/USD (' + id + ')', // chart title
+          display: true
+        },
+        scales: {
+          xAxes: [{
+            type: 'realtime' // auto-scroll on X axis
+          }]
+        },
+        plugins: {
+          streaming: {
+            duration: 300000, // display data for the latest 300000ms (5 mins)
+            onRefresh: function(chart) { // callback on chart update interval
+              Array.prototype.push.apply(
+                chart.data.datasets[0].data, buf[id][0]
+              ); 
+              Array.prototype.push.apply(
+                chart.data.datasets[1].data, buf[id][1]
+              );  
+              buf[id] = [[], []]; // clear buffer
+            }
+          }
         }
       }
 
