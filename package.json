@@ -1,7 +1,7 @@
 {
-  "name": "demo",
-  "version": "0.1.0",
-  "private": true,
+  "name": "cryptokeeper-app",
+  "version": "1.0.0",
+  "description": "",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -12,6 +12,16 @@
     "test": "exit 0",
     "start": "npm run serve"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DefinitelyNotRobots/cryptokeeper-app.git"
+  },
+  "author": "Jack Toumey <jack@toumey.io>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DefinitelyNotRobots/cryptokeeper-app/issues"
+  },
+  "homepage": "https://github.com/DefinitelyNotRobots/cryptokeeper-app#readme",
   "dependencies": {
     "axios": "^0.18.0",
     "bootstrap-vue": "^2.0.0-rc.11",
