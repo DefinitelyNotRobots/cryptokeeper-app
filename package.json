@@ -13,6 +13,7 @@
     "start": "npm run serve"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "chart.js": "^2.7.3",
     "chartjs-plugin-streaming": "^1.7.0",
     "vue": "^2.5.17",

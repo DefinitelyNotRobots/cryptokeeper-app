@@ -2,11 +2,17 @@
   <div class="app">
     <h1>Crypto Monitor</h1>
     <img alt="blockchain" src="./assets/blockchain.png">
+
+    <Prices></Prices>
+
     <div class="container">
       <div class="Chart__list">
         <div class="Chart">
           <h2>Line Chart</h2>
-          <Chart/>
+          <Chart :chartData="chartData" :options="options" />
+        </div>
+        <div class="RandomChart">
+          <RandomChart/>
         </div>
       </div>
     </div>  
@@ -15,11 +21,41 @@
 
 <script>
 import Chart from './components/Chart.vue';
+import RandomChart from './components/RandomChart.vue';
+import Prices from './components/Prices.vue';
+
 
 export default {
   name: 'app',
   components: {
-    Chart
+    Chart, RandomChart, Prices
+  },
+  data() {
+    return {
+      chartData: {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        datasets: [
+          {
+            label: 'Data One',
+            borderColor: '#FC2525',
+            pointBackgroundColor: 'white',
+            borderWidth: 1,
+            pointBorderColor: 'white',
+            backgroundColor: this.gradient,
+            data: [40, 39, 10, 40, 39, 80, 40]
+          }, {
+            label: 'Data Two',
+            borderColor: '#05CBE1',
+            pointBackgroundColor: 'white',
+            pointBorderColor: 'white',
+            borderWidth: 1,
+            backgroundColor: this.gradient2,
+            data: [60, 55, 32, 10, 2, 12, 53]
+          }
+        ]
+      },
+      options: { responsive: true, maintainAspectRatio: false }
+    };
   }
 };
 
