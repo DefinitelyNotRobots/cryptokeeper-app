@@ -1,28 +1,51 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="app">
+    <h1>Crypto Monitor</h1>
+    <img alt="blockchain" src="./assets/blockchain.png">
+    <div class="container">
+      <div class="Chart__list">
+        <div class="Chart">
+          <h2>Line Chart</h2>
+          <Chart/>
+        </div>
+      </div>
+    </div>  
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Chart from './components/Chart.vue';
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    Chart
   }
-}
+};
+
 </script>
 
 <style>
-#app {
+.app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+.Chart {
+  background: #212733;
+  border-radius: 15px;
+  box-shadow: 0px 2px 15px rgba(25, 25, 25, 0.27);
+  margin:  25px 0;
+}
+
+.Chart h2 {
+  margin-top: 0;
+  padding: 15px 0;
+  color:  rgba(255, 0,0, 0.5);
+  border-bottom: 1px solid #323d54;
 }
 </style>
