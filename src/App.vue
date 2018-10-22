@@ -9,7 +9,11 @@
       <div class="Chart__list">
         <div class="Chart">
           <h2>Line Chart</h2>
-          <Chart :chartData="chartData" :options="options" />
+          <Chart :chartData="chartData1" :options="options1" />
+        </div>
+        <div class="Chart2">
+          <h2>Streaming Chart</h2>
+          <StreamingChart :chartData="chartData2" :options="options2" />
         </div>
         <div class="RandomChart">
           <RandomChart/>
@@ -21,18 +25,22 @@
 
 <script>
 import Chart from './components/Chart.vue';
+import StreamingChart from './components/StreamingChart.vue';
 import RandomChart from './components/RandomChart.vue';
 import Prices from './components/Prices.vue';
 
 
+
+// var color = Chart.helpers.color;
+
 export default {
   name: 'app',
   components: {
-    Chart, RandomChart, Prices
+    Chart, RandomChart, Prices, StreamingChart
   },
   data() {
     return {
-      chartData: {
+      chartData1: {
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
         datasets: [
           {
@@ -54,7 +62,66 @@ export default {
           }
         ]
       },
-      options: { responsive: true, maintainAspectRatio: false }
+      options1: { responsive: true, maintainAspectRatio: false },
+
+
+      chartData2: {
+        datasets: [{
+          label: 'Dataset 1 (linear interpolation)',
+          backgroundColor: 'rgba(255, 99, 132, 0.5)',
+          borderColor: 'rgb(255, 99, 132)',
+          fill: false,
+          lineTension: 0,
+          borderDash: [8, 4],
+          data: []
+        }, {
+          label: 'Dataset 2 (cubic interpolation)',
+          backgroundColor: 'rgba(54, 162, 235, 0.5)',
+          borderColor: 'rgb(54, 162, 235)',
+          fill: false,
+          cubicInterpolationMode: 'monotone',
+          data: []
+        }]
+      },
+      options2: {
+        title: {
+          display: true,
+          text: 'Line chart (hotizontal scroll) sample'
+        },
+        scales: {
+          xAxes: [{
+            type: 'realtime',
+            realtime: {
+              onRefresh: function(chart) {
+                chart.data.datasets.forEach(function(dataset) {
+                  dataset.data.push({
+                    x: Date.now(),
+                    y: Math.random()
+                  });
+                });
+              },
+              delay: 2000
+            }
+          }],
+          yAxes: [{
+            scaleLabel: {
+              display: true,
+              labelString: 'value'
+            }
+          }]
+        },
+        tooltips: {
+          mode: 'nearest',
+          intersect: false
+        },
+        hover: {
+          mode: 'nearest',
+          intersect: false
+        }
+      }
+
+
+
     };
   }
 };
