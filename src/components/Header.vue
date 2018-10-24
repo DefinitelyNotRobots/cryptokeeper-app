@@ -1,23 +1,20 @@
 <template>
   <header class="header">
 
-
-
-
     <RouterLink to="/" class="branding"></RouterLink>
     <div class="center">
     <h1>Crypto Monitor</h1>
       <nav>
         <RouterLink class="nav main-nav" to="/">Home</RouterLink>
-        <RouterLink class="nav main-nav" v-if="user" to="/portfolio">Portfolio</RouterLink>
+        <RouterLink class="nav main-nav" v-if="user" to="/dashboard">Portfolio</RouterLink>
         <RouterLink class="nav main-nav" to="/about">About</RouterLink>
         <RouterLink class="nav main-nav" to="/team">Meet the Team</RouterLink>
       </nav>
     </div>
     <div class="user-nav">
-      <!-- <RouterLink class="nav" v-if="user" to="/profile">User: {{ user.email }}</RouterLink>
+      <RouterLink class="nav" v-if="user" to="/dashboard">User: {{ user.email }}</RouterLink>
       <a class="nav" v-if="user" href="/logout" @click.prevent="onSignOut">Sign Out</a>
-      <RouterLink class="nav" v-if="!user" to="/auth">Sign In</RouterLink> -->
+      <RouterLink class="nav" v-if="!user" to="/auth">Sign In</RouterLink>
     </div>
 
   </header>
@@ -95,7 +92,7 @@ a, p {
   padding: 5px;
   margin: 10px;
   text-decoration: none;
-  color: white;
+  color: black;
   border-radius: 5px;
   box-shadow: 0.5px 0.5px 0.5px black;
   background-color: rgba(65,214,195,0);

@@ -1,4 +1,4 @@
-<template>
+x<template>
   <main id="auth-page">
     <div class="call-to-action">
       <h2>{{ label }}</h2>
@@ -18,11 +18,8 @@
       <form @submit.prevent="handleSubmit">
 
 
-        <FormControl v-show="isSignUp" label="first name" class="auth-text">
-          <input class="email-input" v-model="credentials.first">
-        </FormControl>
-        <FormControl v-show="isSignUp" label="last name" class="auth-text">
-          <input class="email-input" v-model="credentials.last">
+        <FormControl v-show="isSignUp" label="name" class="auth-text">
+          <input class="email-input" v-model="credentials.name">
         </FormControl>
         <FormControl label="email"  class="auth-text">
           <input class="email-input" v-model="credentials.email">
@@ -30,7 +27,7 @@
         <FormControl label="password" class="auth-text">
           <input 
             :type="show ? 'text' : 'password'" 
-            v-model="credentials.password">
+            v-model="credentials.clearPassword">
         </FormControl>
 
         <FormControl class="centered">
@@ -58,7 +55,6 @@ import FormControl from './FormControl';
 export default {
   props: {
     onUser: Function,
-    updateCoreData: Function
   },
   components: {
     FormControl
@@ -66,8 +62,9 @@ export default {
   data() {
     return {
       credentials: {
+        name: '',
         email: '',
-        password: ''
+        clearPassword: ''
       },
       show: false,
       type: 'signIn',
@@ -95,9 +92,9 @@ export default {
       const action = this.isSignUp ? signUp : signIn;
       action(this.credentials)
         .then(user => {
-          this.onUser(user);
-          this.updateCoreData();
-          console.log(user);
+          this.onUser(user.user);
+
+          console.log(user.user);
           this.$router.push('/dashboard');
         })
         .catch(err => {

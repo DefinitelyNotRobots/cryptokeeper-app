@@ -1,13 +1,19 @@
 <template>
   <div class="app">
-    <Header />
-    <RouterView />
+    <Header 
+      :user="user"
+      :onSignOut="handleSignOut"
+    />
+    <RouterView 
+      :user="user"
+      :onUser="handleUser"
+    />
     <Footer />
   </div>
 </template>
 
 <script>
-import { checkForToken, signOut } from './services/api';
+import { getToken, signOut } from './services/api';
 import Header from './components/Header.vue';
 import Footer from './components/Footer.vue';
 
@@ -19,15 +25,17 @@ export default {
   data() {
     return {
       user: null,
+      token: null
     };
   },
   created() {
-
-    this.user = checkForToken();
+    this.token = getToken();
   },
   methods: {
     handleUser(user) {
+      console.log(user);
       this.user = user;
+      this.token = getToken();
     },
     handleSignOut() {
       signOut();
