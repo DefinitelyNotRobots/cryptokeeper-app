@@ -26,6 +26,8 @@
 </template>
 
 <script>
+
+
 import Chart from './Chart.vue';
 import StreamingChart from './StreamingChart.vue';
 import RandomChart from './RandomChart.vue';
@@ -70,6 +72,7 @@ export default {
   components: {
     Chart, RandomChart, Prices, StreamingChart, BitcoinChart
   },
+
   data() {
     return {
       chartData1: {

@@ -29,6 +29,8 @@ import bTable from 'bootstrap-vue/es/components/table/table';
 
 // Vue.component('b-table', bTable);
 
+import { getPrices } from '../services/api';
+
 
 export default {
   components: {
@@ -37,15 +39,14 @@ export default {
   data() {
     return {
       info: null,
-      items: [
-        { isActive: true, age: 40, first_name: 'Dickerson', last_name: 'Macdonald' },
-        { isActive: false, age: 21, first_name: 'Larsen', last_name: 'Shaw' },
-        { isActive: false, age: 89, first_name: 'Geneva', last_name: 'Wilson' },
-        { isActive: true, age: 38, first_name: 'Jami', last_name: 'Carney' }
-      ]
+      items: null
     };
   },
   mounted() {
+
+    getPrices()
+      .then(prices => this.items = prices);
+
     axios
       .get('https://api.coindesk.com/v1/bpi/currentprice.json')
       .then(response => (this.info = response.data.bpi));
