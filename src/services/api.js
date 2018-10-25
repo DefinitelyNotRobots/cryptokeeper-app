@@ -3,6 +3,7 @@ const AUTH_URL = `${URL}/auth`;
 const PRICES_URL = `${URL}/prices`;
 const USERS_URL = `${URL}/users`;
 const ACCOUNTS_URL = `${USERS_URL}/accounts`;
+const TRANSACTIONS_URL = `${USERS_URL}/transactions`;
 
 
 // helper functions
@@ -80,30 +81,16 @@ export function getAccounts() {
     .then(responseHandler);
 }
 
+// transactions
+export function postTransaction(transaction) {
+  return fetch(TRANSACTIONS_URL, {
+    method: 'POST',
+    headers: getHeaders(),
+    body: JSON.stringify(transaction)
+  })
+    .then(responseHandler);
+}
 
-// // muscles
-// export function getMuscles() {
-//   return fetch(MUSCLES_URL, {
-//     headers: getHeaders()
-//   })
-//     .then(responseHandler);
-// }
-
-// // movements
-// export function getMovements() {
-//   return fetch(MOVEMENTS_URL, {
-//     headers: getHeaders()
-//   })
-//     .then(responseHandler);
-// }
-// export function addMovement(movement) {
-//   return fetch(MOVEMENTS_URL, {
-//     method: 'POST',
-//     headers: getHeaders(),
-//     body: JSON.stringify(movement)
-//   })
-//     .then(responseHandler);
-// }
 
 // // programs
 // export function getPrograms() {
@@ -176,4 +163,5 @@ export function getAccounts() {
 //   })
 //     .then(responseHandler);
 // }
+
 

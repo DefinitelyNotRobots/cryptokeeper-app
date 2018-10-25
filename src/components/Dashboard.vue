@@ -1,8 +1,9 @@
 <template>
   <div class="portfolio">
 
-    <Prices/>
+    <Trade/>
     <Holdings/>
+    <Prices/>
 
     <div class="container">
       <div class="Chart__list">
@@ -29,6 +30,7 @@
 <script>
 import Prices from './Prices.vue';
 import Holdings from './Holdings.vue';
+import Trade from './Trade.vue';
 
 
 import Chart from './Chart.vue';
@@ -72,7 +74,9 @@ ws.onmessage = function(msg) {     // callback on message receipt
 export default {
   name: 'dashboard',
   components: {
-    Chart, RandomChart, Prices, StreamingChart, BitcoinChart, Holdings
+    Chart, RandomChart, Prices, 
+    StreamingChart, BitcoinChart, 
+    Holdings, Trade
   },
 
   data() {
