@@ -1,22 +1,7 @@
 <template>
   <div class="prices">
     
-    <h2>Bitcoin Price Index</h2>
-
-    <div
-      v-for="currency in info"
-      class="text"
-      :key="currency.description"
-    >
-      {{ currency.description }}:
-
-      <span class="text">
-        <span class="text" v-html="currency.symbol"></span>
-        {{ currency.rate_float | currencydecimal }}
-      </span>
-    </div>
-
-    <h2>Dummy Table</h2>
+    <h2>Prices for Top 10 Coins</h2>
 
     <b-table striped hover class="text" :items="items"></b-table>
 
