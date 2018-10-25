@@ -1,7 +1,8 @@
 <template>
   <div class="portfolio">
 
-    <Prices></Prices>
+    <Prices/>
+    <Holdings/>
 
     <div class="container">
       <div class="Chart__list">
@@ -26,12 +27,13 @@
 </template>
 
 <script>
+import Prices from './Prices.vue';
+import Holdings from './Holdings.vue';
 
 
 import Chart from './Chart.vue';
 import StreamingChart from './StreamingChart.vue';
 import RandomChart from './RandomChart.vue';
-import Prices from './Prices.vue';
 import BitcoinChart from './BitcoinChart.vue';
 import 'chartjs-plugin-streaming';
 
@@ -68,9 +70,9 @@ ws.onmessage = function(msg) {     // callback on message receipt
 };
 
 export default {
-  name: 'app',
+  name: 'dashboard',
   components: {
-    Chart, RandomChart, Prices, StreamingChart, BitcoinChart
+    Chart, RandomChart, Prices, StreamingChart, BitcoinChart, Holdings
   },
 
   data() {

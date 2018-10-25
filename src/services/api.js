@@ -1,10 +1,9 @@
 const URL = '/api';
 const AUTH_URL = `${URL}/auth`;
 const PRICES_URL = `${URL}/prices`;
-// const PROGRAMS_URL = `${URL}/programs`;
-// const WORKOUTS_URL = `${URL}/me/workouts`;
-// const LOGS_URL = `${URL}/me/logs`;
-// const MUSCLES_URL = `${URL}/muscles`;
+const USERS_URL = `${URL}/users`;
+const ACCOUNTS_URL = `${USERS_URL}/accounts`;
+
 
 // helper functions
 function responseHandler(response) {
@@ -68,6 +67,14 @@ export function getMe() {
 // prices
 export function getPrices() {
   return fetch(PRICES_URL, {
+    headers: getHeaders()
+  })
+    .then(responseHandler);
+}
+
+// accounts
+export function getAccounts() {
+  return fetch(ACCOUNTS_URL, {
     headers: getHeaders()
   })
     .then(responseHandler);
