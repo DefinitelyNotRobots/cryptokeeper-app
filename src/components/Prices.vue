@@ -9,7 +9,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 import bTable from 'bootstrap-vue/es/components/table/table';
 
 // Vue.component('b-table', bTable);
@@ -28,18 +27,8 @@ export default {
     };
   },
   mounted() {
-
     getPrices()
       .then(prices => this.items = prices);
-
-    axios
-      .get('https://api.coindesk.com/v1/bpi/currentprice.json')
-      .then(response => (this.info = response.data.bpi));
-  },
-  filters: {
-    currencydecimal(value) {
-      return value.toFixed(2);
-    }
   },
 };
 </script>
