@@ -89,19 +89,19 @@ export default {
         }
       ));
 
-      postTransaction({
-        action: 'buy',
-        currency: this.form.coin,
-        exchange: this.form.exchange,
-        price: this.form.price,
-        quantity: this.form.quantity * this.form.trans
-      });
       // postTransaction({
-      //   coin: this.form.coin,
+      //   action: 'buy',
+      //   currency: this.form.coin,
       //   exchange: this.form.exchange,
       //   price: this.form.price,
       //   quantity: this.form.quantity * this.form.trans
       // });
+      postTransaction({
+        coin: this.form.coin,
+        exchange: this.form.exchange,
+        price: this.form.price,
+        quantity: this.form.quantity * this.form.trans
+      });
 
       this.onReset(evt);
     },
