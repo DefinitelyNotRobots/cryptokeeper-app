@@ -55,7 +55,13 @@ export function signOut() {
 export function getToken() {
   return window.localStorage.getItem('token');
 }
-
+export function getMe() {
+  return fetch(`${AUTH_URL}/me`, {
+    method: 'GET',
+    headers: getHeaders()
+  })
+    .then(responseHandler);
+}
 
 
 
@@ -66,8 +72,6 @@ export function getPrices() {
   })
     .then(responseHandler);
 }
-
-
 
 
 // // muscles

@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { getToken, signOut } from './services/api';
+import { getToken, signOut, getMe } from './services/api';
 import Header from './components/Header.vue';
 import Footer from './components/Footer.vue';
 
@@ -30,6 +30,7 @@ export default {
   },
   created() {
     this.token = getToken();
+    getMe().then(user => this.user = user);
   },
   methods: {
     handleUser(user) {
