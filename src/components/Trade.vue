@@ -1,31 +1,28 @@
 <template>
-  <!-- <form>
-    <label for="min">Minutes<br />
-      <input type="number" v-model="minutes" name="time_m" id="min" min="0" max="59">
-		</label>
-		<label for="sec">Seconds<br />
-      <input type="number" v-model="seconds" name="time_s" id="sec" max="59" min="0">
-    </label>
-    <button type="button" @click="sendTime">Set time</button>
-  </form> -->
-  <b-form-group
-      horizontal
-      id="fieldset1"
-      description="Let's make a deal."
-      label="Enter your transaction details"
-      label-for="input1"
-      :invalid-feedback="invalidFeedback"
-      :valid-feedback="validFeedback"
-      :state="state"
-  >
-    <div>
-      <b-form-select v-model="selected1" :options="options1" class="mb-3" />
-      <b-form-select v-model="selected2" :options="options2" class="mb-3" />
-      <div>Selected: <strong>{{ selected1, selected2, selected3 }}</strong></div>
-    </div>
-    <b-form-input id="input1" :state="state" v-model.trim="name"></b-form-input>
-  </b-form-group>
-  
+  <b-form @submit="onSubmit" @reset="onReset" v-if="show">
+    <b-form-group horizontal description="Let's make a deal.">
+      <div>
+        <b-form-group horizontal description="Are you buying or selling?">
+          <b-form-select v-model="form.trans" :options="trans" class="mb-3" />
+        </b-form-group>
+        <b-form-group horizontal description="Which coin are you trading?">
+          <b-form-select v-model="form.coin" :options="coins" class="mb-3" />
+        </b-form-group>
+        <b-form-group horizontal description="At which exchange?">
+          <b-form-select v-model="form.exchange" :options="exchanges" class="mb-3" />
+        </b-form-group>
+        <b-form-group horizontal description="Here is the current market price">
+          <b-form-input readonly v-model="form.price" type="number"/>
+        </b-form-group>
+        <b-form-group horizontal description="How many coins to buy/sell?">
+          <b-form-input v-model="form.quantity" type="number" placeholder="Enter a quantity" />
+        </b-form-group>
+        <div>Selected: <strong>{{ `${form.coin}, ${form.exchange}, ${form.price}, ${form.quantity}`}}</strong></div>
+      </div>
+      <b-button type="submit" variant="primary">Submit</b-button>
+      <b-button type="reset" variant="danger">Reset</b-button>
+    </b-form-group>
+  </b-form>
 </template>
 
 
@@ -33,47 +30,52 @@
 
 <script>
 
-// select action: 
-    // select currency: 
-    // select exchange: 
-    // (show current price)
-    // number quantity
-
 
 export default {
-  computed: {
-    state() {
-      return this.name.length >= 4 ? true : false;
-    },
-    invalidFeedback() {
-      if(this.name.length > 4) return '';
-      else if(this.name.length > 0) return 'Enter at least 4 characters';
-      else return 'Please enter something';
-    },
-    validFeedback() {
-      return this.state === true ? 'Thank you' : '';
-    }
-  },
+
   data() {
     return {
-      name: '',
-      selectedCoin: null,
-      optionsCoin: [
-        { value: null, text: 'Please select an option' },
-        { value: 'a', text: 'This is First option' },
-        { value: 'b', text: 'Selected Option' },
-        { value: {'C': '3PO'}, text: 'This is an option with object value' },
-        { value: 'd', text: 'This one is disabled', disabled: true }
+      form: {
+        trans: null,
+        coin: null,
+        exchange: null,
+        price: 15.00,
+        quantity: null
+      },
+      trans: [
+        { value: null, text: 'Please select an option', disabled: true },
+        { value: 'buy', text: 'Buy' },
+        { value: 'sell', text: 'Sell' }
       ],
-      selectedExchange: null,
-      optionsExchange: [
-        { value: null, text: 'Please select an option' },
-        { value: 'a', text: 'This is First option' },
-        { value: 'b', text: 'Selected Option' },
-        { value: {'C': '3PO'}, text: 'This is an option with object value' },
-        { value: 'd', text: 'This one is disabled', disabled: true }
-      ]
+      coins: [
+        { value: null, text: 'Please select an option', disabled: true },
+        { value: 'BTC', text: 'Bitcoin (BTC)' },
+        { value: 'ETH', text: 'Ethereum (ETH)' }
+      ],
+      exchanges: [
+        { value: null, text: 'Please select an option', disabled: true },
+        { value: 'Fake Market', text: 'CoinMarketCap.com' }
+      ],
+      show: true
     };
+  },
+  methods: {
+    onSubmit(evt) {
+      evt.preventDefault();
+      alert(JSON.stringify(this.form));
+    },
+    onReset(evt) {
+      evt.preventDefault();
+      /* Reset our form values */
+      this.form.trans = null;
+      this.form.coin = null;
+      this.form.exchange = null;
+      this.form.price = 15.00;
+      this.form.quantity = null;
+      /* Trick to reset/clear native browser form validation state */
+      this.show = false;
+      this.$nextTick(() => this.show = true);
+    }
   }
 };
 </script>
