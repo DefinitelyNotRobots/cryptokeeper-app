@@ -6,10 +6,19 @@
           <b-form-select v-model="form.trans" :options="trans" class="mb-3" />
         </b-form-group>
         <b-form-group horizontal description="Which coin are you trading?">
-          <b-form-select v-model="form.coin" :options="coins" class="mb-3" />
+          <b-form-select 
+            v-model="form.coin"
+            :options="coins"
+            class="mb-3" 
+          />
         </b-form-group>
         <b-form-group horizontal description="At which exchange?">
-          <b-form-select v-model="form.exchange" :options="exchanges" class="mb-3" />
+          <b-form-select 
+            v-model="form.exchange" 
+            :options="exchanges" 
+            @change="onCoin()"
+            class="mb-3" 
+          />
         </b-form-group>
         <b-form-group horizontal description="Here is the current market price">
           <b-form-input readonly v-model="form.price" type="number"/>
@@ -29,9 +38,14 @@
 
 
 <script>
+import { postTransaction } from '../services/api';
 
 
 export default {
+
+  props: {
+    prices: Array
+  },
 
   data() {
     return {
@@ -39,13 +53,13 @@ export default {
         trans: null,
         coin: null,
         exchange: null,
-        price: 15.00,
+        price: null,
         quantity: null
       },
       trans: [
         { value: null, text: 'Please select an option', disabled: true },
-        { value: 'buy', text: 'Buy' },
-        { value: 'sell', text: 'Sell' }
+        { value: 1, text: 'Buy' },
+        { value: -1, text: 'Sell' }
       ],
       coins: [
         { value: null, text: 'Please select an option', disabled: true },
@@ -60,9 +74,36 @@ export default {
     };
   },
   methods: {
+    onCoin() {
+      const quote = this.prices.find(quote => quote.name === this.form.coin);
+      this.form.price = quote.price;
+    },
     onSubmit(evt) {
       evt.preventDefault();
-      alert(JSON.stringify(this.form));
+      alert(JSON.stringify(
+        {
+          coin: this.form.coin,
+          exchange: this.form.exchange,
+          price: this.form.price,
+          quantity: this.form.quantity * this.form.trans
+        }
+      ));
+
+      postTransaction({
+        action: 'buy',
+        currency: this.form.coin,
+        exchange: this.form.exchange,
+        price: this.form.price,
+        quantity: this.form.quantity * this.form.trans
+      });
+      // postTransaction({
+      //   coin: this.form.coin,
+      //   exchange: this.form.exchange,
+      //   price: this.form.price,
+      //   quantity: this.form.quantity * this.form.trans
+      // });
+
+      this.onReset(evt);
     },
     onReset(evt) {
       evt.preventDefault();
@@ -70,7 +111,7 @@ export default {
       this.form.trans = null;
       this.form.coin = null;
       this.form.exchange = null;
-      this.form.price = 15.00;
+      this.form.price = null;
       this.form.quantity = null;
       /* Trick to reset/clear native browser form validation state */
       this.show = false;

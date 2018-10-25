@@ -1,10 +1,7 @@
 <template>
   <div class="prices">
-    
     <h2>Your Holdings</h2>
-
-    <b-table striped hover class="text" :items="items"></b-table>
-
+    <b-table striped hover class="text" :items="accounts"></b-table>
   </div>    
 </template>
 
@@ -23,12 +20,25 @@ export default {
   data() {
     return {
       info: null,
-      items: null
+      accounts: null
     };
   },
   mounted() {
     getAccounts()
-      .then(accounts => this.items = accounts.currencies);
+      .then(accounts => {
+        
+        this.accounts = accounts.reduce((acc, current) => {
+          current.currencies.forEach(currency => {
+            acc.push({
+              exchange: current.exchange,
+              coin: currency.name,
+              quantity: currency.quantity
+            });
+          });
+          return acc;
+        }, []);
+
+      });
   },
   filters: {
     currencydecimal(value) {

@@ -1,9 +1,9 @@
 <template>
   <div class="portfolio">
 
-    <Trade/>
+    <Trade :prices="prices"/>
     <Holdings/>
-    <Prices/>
+    <Prices :prices="prices" />
 
     <div class="container">
       <div class="Chart__list">
@@ -32,6 +32,7 @@ import Prices from './Prices.vue';
 import Holdings from './Holdings.vue';
 import Trade from './Trade.vue';
 
+import { getPrices } from '../services/api';
 
 import Chart from './Chart.vue';
 import StreamingChart from './StreamingChart.vue';
@@ -79,8 +80,17 @@ export default {
     Holdings, Trade
   },
 
+  mounted() {
+    getPrices().then(prices => this.prices = prices);
+  },
+
   data() {
     return {
+
+      prices: null,
+
+
+
       chartData1: {
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
         datasets: [

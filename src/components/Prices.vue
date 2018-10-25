@@ -3,7 +3,7 @@
     
     <h2>Prices for Top 10 Coins</h2>
 
-    <b-table striped hover class="text" :items="items"></b-table>
+    <b-table striped hover class="text" :items="prices"></b-table>
 
   </div>    
 </template>
@@ -13,22 +13,14 @@ import bTable from 'bootstrap-vue/es/components/table/table';
 
 // Vue.component('b-table', bTable);
 
-import { getPrices } from '../services/api';
 
 
 export default {
   components: {
     bTable
   },
-  data() {
-    return {
-      info: null,
-      items: null
-    };
-  },
-  mounted() {
-    getPrices()
-      .then(prices => this.items = prices);
+  props: {
+    prices: Array
   },
 };
 </script>
