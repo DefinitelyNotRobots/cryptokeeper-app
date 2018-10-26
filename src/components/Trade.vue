@@ -75,7 +75,7 @@ export default {
   },
   methods: {
     onCoin() {
-      const quote = this.prices.find(quote => quote.name === this.form.coin);
+      const quote = this.prices.find(quote => quote.symbol === this.form.coin);
       this.form.price = quote.price;
     },
     onSubmit(evt) {

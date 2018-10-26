@@ -81,7 +81,20 @@ export default {
   },
 
   mounted() {
-    getPrices().then(prices => this.prices = prices);
+    getPrices().then(prices => {
+      
+      this.prices = Object.keys(prices)
+        .map(symbol => ({
+          symbol: symbol,
+          price: prices[symbol].price,
+          rank: prices[symbol].rank
+        }))
+        .sort((a, b) => {
+          return a.rank - b.rank;
+        });
+      
+    });
+    console.log(this.prices);
   },
 
   data() {
