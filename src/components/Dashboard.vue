@@ -1,9 +1,11 @@
 <template>
   <div class="portfolio">
 
-    <Trade :prices="prices"/>
+    <Leaderboard :leaders="leaders" />
+    <Trade :prices="prices" />
     <Holdings :accounts="accounts" />
     <Prices :prices="prices" />
+
 
     <div class="container">
       <div class="Chart__list">
@@ -31,10 +33,9 @@
 import Prices from './Prices.vue';
 import Holdings from './Holdings.vue';
 import Trade from './Trade.vue';
+import Leaderboard from './Leaderboard.vue';
 
-import { getPrices } from '../services/api';
-import { getAccounts } from '../services/api';
-
+import { getPrices, getAccounts, getLeaderboard } from '../services/api';
 
 import Chart from './Chart.vue';
 import StreamingChart from './StreamingChart.vue';
@@ -79,7 +80,7 @@ export default {
   components: {
     Chart, RandomChart, Prices, 
     StreamingChart, BitcoinChart, 
-    Holdings, Trade
+    Holdings, Trade, Leaderboard
   },
 
   mounted() {
@@ -99,8 +100,6 @@ export default {
     getAccounts()
       .then(account => {      
         
-        console.log(account);
-
         this.accounts = account.currencies.reduce((acc, coin) => {
           acc.push({
             exchange: account.exchange,
@@ -109,8 +108,22 @@ export default {
           });
           return acc;
         }, []);
+      });
 
+    getLeaderboard()
+      .then(leaders => {
+        
+        console.log(leaders);
 
+        this.leaders = leaders;
+
+        this.leaders = leaders.reduce((acc, leader) => {
+          acc.push({
+            user: leader.user[0].name,
+            total: leader.usd
+          });
+          return acc;
+        }, []);
       });
   },
 
@@ -119,6 +132,7 @@ export default {
 
       prices: null,
       accounts: null,
+      leaders: null,
 
 
 

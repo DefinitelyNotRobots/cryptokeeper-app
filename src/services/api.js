@@ -4,6 +4,7 @@ const PRICES_URL = `${URL}/prices`;
 const USERS_URL = `${URL}/users`;
 const ACCOUNTS_URL = `${USERS_URL}/accounts`;
 const TRANSACTIONS_URL = `${USERS_URL}/transactions`;
+const LEADERBOARD_URL = `${URL}/leaderboard`;
 
 
 // helper functions
@@ -91,80 +92,11 @@ export function postTransaction(transaction) {
     .then(responseHandler);
 }
 
-
-
-
-
-// // programs
-// export function getPrograms() {
-//   return fetch(PROGRAMS_URL, {
-//     headers: getHeaders()
-//   })
-//     .then(responseHandler);
-// }
-// export function addProgram(program) {
-//   return fetch(`${PROGRAMS_URL}`, {
-//     method: 'POST',
-//     headers: getHeaders(),
-//     body: JSON.stringify(program)
-//   })
-//     .then(responseHandler);
-// }
-
-// // workouts
-// export function getWorkouts() {
-//   return fetch(WORKOUTS_URL, {
-//     headers: getHeaders()
-//   })
-//     .then(responseHandler);
-// }
-// export function addWorkout(programId) {
-//   return fetch(WORKOUTS_URL, {
-//     method: 'POST',
-//     headers: getHeaders(),
-//     body: JSON.stringify(programId)
-//   })
-//     .then(responseHandler);
-// }
-// export function removeWorkout(id) {
-//   return fetch(WORKOUTS_URL, {
-//     method: 'DELETE',
-//     headers: getHeaders(),
-//     body: JSON.stringify(id)
-//   })
-//     .then(responseHandler);
-// }
-
-// // logs
-// export function getLogs() {
-//   return fetch(LOGS_URL, {
-//     headers: getHeaders()
-//   })
-//     .then(responseHandler);
-// }
-// export function addLog(log) {
-//   return fetch(LOGS_URL, {
-//     method: 'POST',
-//     headers: getHeaders(),
-//     body: JSON.stringify(log)
-//   })
-//     .then(responseHandler);
-// }
-// export function updateLog(log) {
-//   return fetch(LOGS_URL, {
-//     method: 'PUT',
-//     headers: getHeaders(),
-//     body: JSON.stringify(log)
-//   })
-//     .then(responseHandler);
-// }
-// export function removeLog(id){
-//   return fetch(LOGS_URL, {
-//     method: 'DELETE',
-//     headers: getHeaders(),
-//     body: JSON.stringify(id)
-//   })
-//     .then(responseHandler);
-// }
-
+// leaderboard
+export function getLeaderboard() {
+  return fetch(LEADERBOARD_URL, {
+    headers: getHeaders()
+  })
+    .then(responseHandler);
+}
 
