@@ -1,13 +1,15 @@
 <template>
   <div class="portfolio">
 
-    <Leaderboard :leaders="leaders" />
-    <Trade :prices="prices" />
-    <Holdings :accounts="accounts" />
-    <Prices :prices="prices" />
+    <div class="core">
+      <Trade class="trade-form" :prices="prices" />
+      <Prices class="tables" :prices="prices" :updatedAt="updatedAt" />
+      <Holdings class="tables" :accounts="accounts" />
+      <Leaderboard class="tables" :leaders="leaders" />
+    </div>
 
 
-    <div class="container">
+    <!-- <div class="container">
       <div class="Chart__list">
         <div class="Chart">
           <h2>Line Chart</h2>
@@ -17,15 +19,17 @@
           <h2>Streaming Chart</h2>
           <StreamingChart :chartData="chartData2" :options="options2" />
         </div>
-        <!-- <div class="Chart3">
+        <div class="Chart3">
           <h2>Bitcoin Chart</h2>
           <BitcoinChart id="Bitfinex" :chartData="chartData3" :options="options3" />
-        </div> -->
+        </div>
         <div class="RandomChart">
           <RandomChart/>
         </div>
       </div>
-    </div>  
+    </div> -->
+
+
   </div>
 </template>
 
@@ -88,13 +92,14 @@ export default {
       
       this.prices = Object.keys(prices)
         .map(symbol => ({
+          rank: prices[symbol].rank,
           symbol: symbol,
-          price: prices[symbol].price,
-          rank: prices[symbol].rank
+          price: parseFloat(prices[symbol].price.toFixed(2))
         }))
         .sort((a, b) => {
           return a.rank - b.rank;
         });
+      this.updatedAt = new Date(prices.BTC.updated).toLocaleTimeString();
       
     });
     getAccounts()
@@ -113,10 +118,6 @@ export default {
     getLeaderboard()
       .then(leaders => {
         
-        console.log(leaders);
-
-        this.leaders = leaders;
-
         this.leaders = leaders.reduce((acc, leader) => {
           acc.push({
             user: leader.user[0].name,
@@ -131,6 +132,7 @@ export default {
     return {
 
       prices: null,
+      updatedAt: null,
       accounts: null,
       leaders: null,
 
@@ -268,12 +270,24 @@ export default {
 </script>
 
 <style>
+
+.core {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+}
+
+
+.tables {
+  margin: 8px;
+}
+
 .portfolio {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #a9bccf;
   margin-top: 60px;
 }
 

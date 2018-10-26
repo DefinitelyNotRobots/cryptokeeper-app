@@ -2,6 +2,7 @@
   <div class="prices">
     
     <h2>Prices for Top 10 Coins</h2>
+    <p>Updated at: {{ updatedAt }} </p>
 
     <b-table striped hover class="text" :items="prices"></b-table>
 
@@ -20,7 +21,8 @@ export default {
     bTable
   },
   props: {
-    prices: Array
+    prices: Array,
+    updatedAt: String
   },
 };
 </script>
@@ -38,11 +40,11 @@ export default {
   margin-top: 0;
   padding: 15px 0;
   color:  rgba(255, 0,0, 0.5);
-  border-bottom: 1px solid #323d54;
+  border-bottom: 1px solid #ccdaf6;
 }
 
 .text {
-  color: #606162;
+  color: #a9bccf;
 }
 
 

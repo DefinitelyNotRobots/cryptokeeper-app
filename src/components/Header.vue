@@ -3,10 +3,10 @@
 
     <RouterLink to="/" class="branding"></RouterLink>
     <div class="center">
-    <h1>Crypto Monitor</h1>
+    <h1>Cryptotraditron 9000</h1>
       <nav>
         <RouterLink class="nav main-nav" to="/">Home</RouterLink>
-        <RouterLink class="nav main-nav" v-if="user" to="/dashboard">Portfolio</RouterLink>
+        <RouterLink class="nav main-nav" v-if="user" to="/dashboard">Dashboard</RouterLink>
         <RouterLink class="nav main-nav" to="/about">About</RouterLink>
         <RouterLink class="nav main-nav" to="/team">Meet the Team</RouterLink>
       </nav>
@@ -59,7 +59,7 @@ export default {
   text-decoration: none;
 }
 
-/* #current-user {
+#current-user {
   width: 140px;
   font-size: 22px;
   padding: 5px;
@@ -71,7 +71,7 @@ export default {
   box-shadow: 0.5px 0.5px 0.5px black;
   background-color: rgba(65,214,195,0);
   border: 4px solid #ffd90000;
-} */
+}
 
 .user-nav {
   display: flex;
@@ -87,7 +87,7 @@ a, p {
 }
 
 .nav {
-  width: 140px;
+  width: 180px;
   font-size: 22px;
   padding: 5px;
   margin: 10px;
@@ -107,11 +107,11 @@ nav {
   padding-bottom: 20px;
 }
 
-/* a.nav:hover {
-  background-color: var(--gymred);
+a.nav:hover {
+  background-color: grey;
   box-shadow: 0.9px 0.9px 0.9px black;
   border: 2px solid #CCDDD3
-} */
+}
 
 h1 {
   /* font-family: 'Bowlby One SC', cursive; */
@@ -135,7 +135,7 @@ header {
 
   justify-content: flex-start;
   box-shadow: 3px 2px 2px black;
-  /* background: var(--gymred); */
+  /* background: grey; */
 }
 
 @media screen and (max-width: 1200px) {

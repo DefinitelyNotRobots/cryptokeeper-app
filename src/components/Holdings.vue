@@ -45,7 +45,7 @@ export default {
 }
 
 .text {
-  color: #606162;
+  color: #a9bccf;
 }
 
 

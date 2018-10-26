@@ -4,7 +4,7 @@
       <router-link class="call-to-action" to="/auth">Get Started</router-link>
     </h2>
     <h2 class="center" v-if="user">
-      <router-link class="call-to-action" to="/portfolio">Start trading</router-link>
+      <router-link class="call-to-action" to="/dashboard">Start Trading</router-link>
     </h2>
 
   </main>
@@ -35,16 +35,16 @@ export default {
 <style scoped>
 
 
-/* @font-face {
+@font-face {
     font-family: BOMBARD;
     src: url("../assets/fonts/BOMBARD.ttf") format("opentype");
 }
 
 
-main {
+/* main {
   background: url(../assets/background.jpg);
   background-size: cover;
-}
+} */
 
 h2 {
   margin-top: 300px;
@@ -117,6 +117,6 @@ img {
       font-size: 32px;
       letter-spacing: 1px;
     }
-} */
+}
 
 </style>

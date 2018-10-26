@@ -1,5 +1,5 @@
 <template>
-  <div class="app">
+  <div id="app">
     <Header 
       :user="user"
       :onSignOut="handleSignOut"
@@ -49,14 +49,6 @@ export default {
 </script>
 
 <style>
-.app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 
 .Chart {
   background: #212733;
