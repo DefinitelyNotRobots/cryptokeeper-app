@@ -1,4 +1,4 @@
-x<template>
+<template>
   <main id="auth-page">
     <div class="call-to-action">
       <h2>{{ label }}</h2>
@@ -111,12 +111,22 @@ export default {
 .centered {
   display: grid;
   justify-items: center;
+  margin: 20px 5px;
+  border: none;
 }
 
 .add-button {
   width: 55%;
   margin: 5px auto;
+  background: lightsteelblue;
+  border-radius: 15px 15px;
 }
+
+.add-button:hover {
+  background: steelblue;
+  cursor: pointer;
+}
+
 .bottom-button {
   border-radius: 10%;
   background-color: black;
@@ -153,6 +163,7 @@ h2 {
 
 .email-input {
   /* width: 220px; */
+  /* margin: 10px */
 }
 
 .auth-form {
@@ -161,16 +172,17 @@ h2 {
 }
 
 .form-control {
-  margin: 0 auto;
+  margin: 10 auto;
 }
 
 input {
-  margin: 0px auto;
+  margin: 0 auto;
   width: 100%; 
 }
 .auth-text {
-  color: white;
-  text-shadow: 3px 3px 3px black;
+  color: black;
+  /* text-shadow: 3px 3px 3px black; */
+  border: none;
   margin: 5px;
 }
 h2 {
