@@ -12,39 +12,30 @@
         }}
       </button>
     </div>
-    
-    <div class="auth-form">
-      <pre>{{ error }}</pre>
-      <form @submit.prevent="handleSubmit">
 
-
-        <FormControl v-show="isSignUp" label="name" class="auth-text">
-          <input class="email-input" v-model="credentials.name">
-        </FormControl>
-        <FormControl label="email"  class="auth-text">
-          <input class="email-input" v-model="credentials.email">
-        </FormControl>
-        <FormControl label="password" class="auth-text">
-          <input 
-            :type="show ? 'text' : 'password'" 
-            v-model="credentials.clearPassword">
-        </FormControl>
-
-        <FormControl class="centered">
-          <button 
+    <b-form class="auth-form"   @submit.prevent="handleSubmit" >
+      <b-form-group horizontal description="Let's get going!">
+        <div>
+          <b-form-group horizontal description="Name" v-show="isSignUp" class="auth-text">
+            <b-form-input class="email-input" v-model="credentials.name"/>
+          </b-form-group>
+          <b-form-group horizontal description="Email" class="auth-text">
+            <b-form-input class="email-input" v-model="credentials.email"/>
+          </b-form-group>
+          <b-form-group horizontal description="Password" class="auth-text">
+            <b-form-input :type="show ? 'text' : 'password'" v-model="credentials.clearPassword"/>
+          </b-form-group>
+        </div>
+        <b-button 
             @click="show = !show"
-            type="button"
-            class="bottom-button"
           >
             {{ show ? 'Hide' : 'Show' }}
-          </button>
-          <button type="submit" class="bottom-button">                  
-            {{ label }}
-          </button>
-        </FormControl>
+        </b-button>
+        <b-button type="submit" variant="primary">{{ label }}</b-button>
+        <b-button type="reset" variant="danger">Reset</b-button>
+      </b-form-group>
+    </b-form>
 
-      </form>
-    </div>
   </main>
 </template>
 
@@ -161,13 +152,18 @@ h2 {
   width: 40%;
 }
 
+button {
+  width: 90px;
+  margin: 5px;
+}
+
 .email-input {
   /* width: 220px; */
   /* margin: 10px */
 }
 
 .auth-form {
-  width: 350px;
+  width: 650px;
   margin: 0 auto;
 }
 
