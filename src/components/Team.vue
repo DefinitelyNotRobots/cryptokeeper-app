@@ -1,19 +1,19 @@
 <template>
   <main>
     <h2>Team Big Cats</h2>
+    <li class="main-team"> <a href="https://github.com/DefinitelyNotRobots">Check us out on Github</a></li>
     <ul class="team-section">
-      <li class="main-team"> <a href="https://github.com/DefinitelyNotRobots">Check us out on Github</a></li>
       <li class="profile-section">
         <ul>
           <li class="profile">
             <img src="../assets/profiles/mike.jpeg">
             <a href="https://github.com/MikeBLambert">Mike Lambert</a>
-            <p>[enter bio]</p>
+            <p>Mike is a former professional BMXer. In his spare time, fights crime in a Batman costume.</p>
           </li>
           <li class="profile">
               <img src="../assets/profiles/claire.png">
               <a href="https://github.com/R-i-t-a">Claire</a>
-              <p>[enter bio]</p>
+              <p>Claire has a flair for fashion; you will never catch her wearing a polo. Furthermore, her culinary exploits are locally-renowned.</p>
           </li>
           <li class="profile">
             <img src="../assets/profiles/jack.png">
@@ -42,10 +42,6 @@ export default {
 
 <style scoped>
 
-#team-pic {
-  width: 75%;
-}
-
 .team-section {
   display: grid;
   grid-template-rows: auto 1fr;
@@ -53,9 +49,9 @@ export default {
 }
 .profile a, .main-team a {
   display: block;
-  color: white;
+  color: black;
   font-size: 28px;
-  text-shadow: 3px 3px 3px black;
+  text-shadow: 1px 1px 1px black;
 }
 .team-section, .main-team, .profile-section, .profile {
   border: none;
@@ -72,14 +68,17 @@ export default {
   width: 100%;
 }
 
+li {
+  list-style: none;
+}
 
 
 main {
-  color: white;
+  color: black;
 }
 
 h2, p {
-  text-shadow: 3px 3px 3px black;
+  text-shadow: 1px 1px 1px black;
 }
 
 h2 {

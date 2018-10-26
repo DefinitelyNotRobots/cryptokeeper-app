@@ -99,6 +99,7 @@ export default {
         })
         .catch(err => {
           this.error = err;
+          console.log(err);
         });
     }
   }

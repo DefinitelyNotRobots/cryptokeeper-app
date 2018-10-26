@@ -88,20 +88,19 @@ export default {
   },
 
   mounted() {
-    getPrices().then(prices => {
+    getPrices()
+      .then(prices => {
       
-      this.prices = Object.keys(prices)
-        .map(symbol => ({
-          rank: prices[symbol].rank,
-          symbol: symbol,
-          price: parseFloat(prices[symbol].price.toFixed(2))
-        }))
-        .sort((a, b) => {
-          return a.rank - b.rank;
-        });
-      this.updatedAt = new Date(prices.BTC.updated).toLocaleTimeString();
+        this.prices = Object.keys(prices)
+          .map(symbol => ({
+            rank: prices[symbol].rank,
+            symbol: symbol,
+            price: parseFloat(prices[symbol].price.toFixed(2))
+          }))
+          .sort((a, b) => a.rank - b.rank);
+        this.updatedAt = new Date(prices.BTC.updated).toLocaleTimeString();
       
-    });
+      });
     getAccounts()
       .then(account => {      
         
@@ -135,8 +134,6 @@ export default {
       updatedAt: null,
       accounts: null,
       leaders: null,
-
-
 
       chartData1: {
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],

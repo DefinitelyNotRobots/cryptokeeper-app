@@ -87,17 +87,22 @@ export default {
     },
     onSubmit(evt) {
       evt.preventDefault();
-      alert(
-        `You ${this.form.trans ? 'bought' : 'sold'} ${this.form.quantity} ${this.form.coin}s on ${this.form.coin} at ${this.form.price} per ${this.form.coin}!
-        `
-      );
+
 
       postTransaction({
         currency: this.form.coin,
         exchange: this.form.exchange,
         price: this.form.price,
         quantity: this.form.quantity * this.form.trans
-      });
+      })
+        .catch(err => {
+          if(!err) alert(
+            `You ${this.form.trans ? 'bought' : 'sold'} ${this.form.quantity} ${this.form.coin}s on ${this.form.coin} at ${this.form.price} per ${this.form.coin}!
+            `
+          );
+          else alert(`Error: ${err}`);
+        });
+
 
       this.onReset(evt);
     },
