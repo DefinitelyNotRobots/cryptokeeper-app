@@ -92,7 +92,6 @@ export default {
       postTransaction({
         currency: this.form.coin,
         exchange: this.form.exchange,
-        price: this.form.price,
         quantity: this.form.quantity * this.form.trans
       })
         .catch(err => {
