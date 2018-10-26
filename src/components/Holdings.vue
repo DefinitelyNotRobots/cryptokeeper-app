@@ -10,41 +10,21 @@ import bTable from 'bootstrap-vue/es/components/table/table';
 
 // Vue.component('b-table', bTable);
 
-import { getAccounts } from '../services/api';
 
 
 export default {
   components: {
     bTable
   },
+  props: {
+    accounts: Array
+  },
   data() {
     return {
       info: null,
-      accounts: null
     };
-  },
-  mounted() {
-    getAccounts()
-      .then(accounts => {
-        
-        this.accounts = accounts.reduce((acc, current) => {
-          current.currencies.forEach(currency => {
-            acc.push({
-              exchange: current.exchange,
-              coin: currency.name,
-              quantity: currency.quantity
-            });
-          });
-          return acc;
-        }, []);
+  }
 
-      });
-  },
-  filters: {
-    currencydecimal(value) {
-      return value.toFixed(2);
-    }
-  },
 };
 </script>
 

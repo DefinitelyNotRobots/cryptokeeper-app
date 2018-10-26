@@ -2,7 +2,7 @@
   <div class="portfolio">
 
     <Trade :prices="prices"/>
-    <Holdings/>
+    <Holdings :accounts="accounts" />
     <Prices :prices="prices" />
 
     <div class="container">
@@ -33,6 +33,8 @@ import Holdings from './Holdings.vue';
 import Trade from './Trade.vue';
 
 import { getPrices } from '../services/api';
+import { getAccounts } from '../services/api';
+
 
 import Chart from './Chart.vue';
 import StreamingChart from './StreamingChart.vue';
@@ -94,13 +96,29 @@ export default {
         });
       
     });
-    console.log(this.prices);
+    getAccounts()
+      .then(account => {      
+        
+        console.log(account);
+
+        this.accounts = account.currencies.reduce((acc, coin) => {
+          acc.push({
+            exchange: account.exchange,
+            coin: coin.name,
+            quantity: coin.quantity
+          });
+          return acc;
+        }, []);
+
+
+      });
   },
 
   data() {
     return {
 
       prices: null,
+      accounts: null,
 
 
 
