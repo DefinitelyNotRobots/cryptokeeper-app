@@ -34,7 +34,6 @@ export default {
   },
   methods: {
     handleUser(user) {
-      console.log(user);
       this.user = user;
       this.token = getToken();
     },

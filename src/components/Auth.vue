@@ -93,13 +93,10 @@ export default {
       action(this.credentials)
         .then(user => {
           this.onUser(user.user);
-
-          console.log(user.user);
           this.$router.push('/dashboard');
         })
         .catch(err => {
           this.error = err;
-          console.log(err);
         });
     }
   }
